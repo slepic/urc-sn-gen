@@ -1,0 +1,107 @@
+{block title}Product List{/block}
+
+{block content}
+<form n:name=$productAddForm>
+<div class="panel panel-urc">
+<div class="panel-heading">Nová komponenta</div>
+<div class="panel-collapse">
+<ul class=error n:if="$productAddForm->ownErrors">
+        <li n:foreach="$productAddForm->ownErrors as $error">{$error}</li>
+</ul>
+<table class="list table table-bordered">
+    <thead>
+    <tr>
+        <th>Typ</th>
+        <th>SN</th>
+        <th>Poznámka</th>
+        <th>Akce</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td n:foreach="$productAddForm->controls as $input" n:if="!$input->getOption(rendered) && $input->getOption(type) !== hidden">
+            <div>{input $input}</div>
+            <div class=error n:ifcontent>{$input->error}</div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</div>
+</form>
+    
+<form n:name=$productFilterForm>
+<div class="panel panel-urc">
+<div class="panel-heading">Seznam komponent</div>
+<div class="panel-collapse">
+<table class="list table table-striped table-bordered table-hover">
+    <colgroup>
+        <col width="15%" />
+        <col width="15%" />
+        <col width="15%" />
+        <col width="15%" />
+        <col width="15%" />
+        <col width="15%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Typ</th>
+            <th>Původní SN</th>
+            <th>Poslední SN</th>
+            <th>Poznámka</th>
+            <th>Datum</th>
+            <th>Akce</th>
+        </tr>
+        <tr>
+            <td>{input $productFilterForm['type']}</td>
+            <td colspan="2">{input $productFilterForm['sn']}</td>
+            <td></td>
+            <td></td>
+            <td>{input $productFilterForm['filter']}</td>
+        </tr>
+        
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="6">
+                <ul n:if="$pager->getPageCount() > 1" class="pagination">
+                    {if $pager->isFirst()}
+                    <li class="disabled"><a href="#">&laquo;</a></li>
+                    {else}
+                    <li><a href="{link this, 'page' => $pager->firstPage}">&laquo;</a></li>
+                    <li><a href="{link this, 'page' => $pager->page - 1}">{$pager->page-1}</a></li>
+                    {/if}
+                    <li class="active"><a href="#">{$pager->getPage()}</a></li>
+                    {if $pager->isLast()}
+                    <li class="disabled"><a href="#">&raquo;</a></li>
+                    {else}
+                    <li><a href="{link this, 'page' => $pager->page + 1}">{$pager->getPage()+1}</a></li>
+                    <li><a href="{link this, 'page' => $pager->lastPage}">&raquo;</a></li>
+                    {/if}
+                </ul>
+            </td>
+        </tr>
+        {foreach $products as $product}
+            <tr>
+                <td>{$product->getTypeName()}</td>
+                <td>{$product->getOriginalSerialNumber()->getSerialNumber()}</td>
+                <td>{$product->getLastSerialNumber()->getSerialNumber()}</td>
+                <td>{$product->getLastSerialNumber()->getNote()}</td>
+                <td>{$product->getLastSerialNumber()->getDateTimeInserted()->format('d.m.Y H:i')}</td>
+                <td>
+                    <a n:href="Product:detail $product->getId()" class="btn btn-urc">Detail</a>
+                    <a n:href="Product:delete $product->getId()" class="btn btn-urc" onclick="return confirm('Opravdu chcete tuto komponentu smazat?')">Smazat</a>
+                </td>
+            </tr>
+        {/foreach}
+        {if count($products) == 0}
+            <tr>
+                <td colspan="6">Nenalezen žádný záznam dle zvolených kriterií.</td>
+            </tr>
+        {/if}
+    </tbody>
+</table>
+</div>
+</div>
+</form>
+{/block}

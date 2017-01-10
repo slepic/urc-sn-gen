@@ -1,0 +1,97 @@
+{block title}Product Detail{/block}
+
+{block content}
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a n:href="Product:list">Seznam komponent</a></li>
+    <li class="breadcrumb-item active">{$product->getOriginalSerialNumber()->getSerialNumber()}</li>
+</ul>
+
+
+<div class="panel panel-urc">
+<div class="panel-heading">Detail komponenty</div>
+<div class="panel-collapse">
+<table class="list table table-bordered">
+    <thead>
+        <tr>
+            <th>Typ</th>
+            <th>Původní SN</th>
+            <th>Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{$product->getTypeName()}</td>
+            <td>{$product->getOriginalSerialNumber()->getSerialNumber()}</td>
+            <td><a n:href="Product:delete $product->getId()" onclick="return confirm('Opravdu chcete tuto komponentu smazat?')" class="btn btn-urc">Smazat</a></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
+        
+<div class="panel panel-urc">
+<div class="panel-heading">Další sériová čísla</div>
+<div class="panel-collapse">
+<table class="list table table-bordered table-striped table-hover">
+    <colgroup>
+        <col width="25%" />
+        <col width="25%" />
+        <col width="25%" />
+        <col width="25%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>SN</th>
+            <th>Poznámka</th>
+            <th>Datum</th>
+            <th>Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr n:foreach="$product->getNextSerialNumbers() as $serialNumber">
+            <td>{$serialNumber->getSerialNumber()}</td>
+            <td>{$serialNumber->getNote()}</td>
+            <td>{$serialNumber->getDateTimeInserted()->format('d.m.Y H:i')}</td>
+            <td>{if !$iterator->first && $iterator->last}<a n:href="Product:deleteLastSN $product->getId()" onclick="return confirm('Opravdu chcete smazat poslední seriové číslo této komponenty?')" class="btn btn-urc">Smazat</a>{/if}</td>
+        </tr>
+    </tbody>
+</table>
+</div>        
+</div>
+            
+{if $nextSerialNumber}
+<form n:name=$addNextSerialNumberForm>
+<div class="panel panel-urc">
+<div class="panel-heading">Nové sériové číslo</div>
+<div class="panel-collapse">
+<table class="list table table-bordered">
+    <colgroup>
+        <col width="25%" />
+        <col width="25%" />
+        <col width="25%" />
+        <col width="25%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>SN</th>
+            <th>Poznámka</th>
+            <th>Datum</th>
+            <th>Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{$nextSerialNumber}</td>
+            <td>{input $addNextSerialNumberForm['note']}</td>
+            <td>nyní</td>
+            <td>{input $addNextSerialNumberForm['save']}</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
+</form>
+{/if}
+
+{/block}

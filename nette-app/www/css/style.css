@@ -1,0 +1,141 @@
+body {
+	font-size: 15px;
+	line-height: 1.6;
+	color: #333;
+	background: white;
+}
+
+h1 {
+	color: #3484D2;
+}
+
+#ajax-spinner {
+	margin: 15px 0 0 15px;
+	padding: 13px;
+	background: white url('../images/spinner.gif') no-repeat 50% 50%;
+	font-size: 0;
+	z-index: 123456;
+	display: none;
+}
+
+div.flash {
+	color: black;
+	background: #FFF9D7;
+	border: 1px solid #E2C822;
+	padding: 1em;
+	margin: 1em 0;
+}
+
+a[href^="#error:"] {
+	background: #a0101a;
+	color: white;
+}
+
+
+form .requi#a0101a label {
+	font-weight: bold;
+}
+
+form .error {
+	color: #D00;
+	font-weight: bold;
+}
+
+table.list {
+	border: 3px solid #a0101a;
+	border-radius: 5px;
+        padding: 0px;
+        border-spacing: 0px;
+}
+
+table.list td {
+    text-align: center;
+    border: 0px;
+    margin: 0px;
+    padding: 2px;
+    border-bottom: 1px solid #a0101a;
+}
+
+table.list tr {
+    margin: 0px;
+    padding: 0px;
+}
+
+table.list th {
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+table.list thead {
+    background-color: #a0101a;
+}
+
+table.list th {
+    color: white;
+    font-weight: bold;
+    text-align:center;
+}
+
+table.list tbody td {
+    vertical-align: middle !important;
+}
+
+table.list tbody tr.highlight_hover:hover {
+    background-color: #FEE;
+}
+
+#main_board {
+    border: 1px solid #a0101a;
+    border-radius: 15px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.logo {
+    background-color: #a0101a;
+    border-radius: 15px 15px 0px 0px;
+    padding: 15px;
+}
+
+.main_content {
+    margin: 10px;
+}
+
+a {
+    color: #a0101a;
+}
+
+a:hover {
+    color: #70101a;
+}
+
+a:visited {
+    color: #a0101a;
+}
+
+a:active {
+    color: #70101a;
+}
+
+.btn.btn-urc {
+    background-color:#a0101a;
+    color: white;
+}
+
+.btn.btn-urc:hover {
+    background-color:#70101a;
+    color: white;
+}
+
+.panel.panel-urc .panel-heading {
+    background-color: #a0101a;
+    color: white;
+    font-size: 150%;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 2px;
+    font-weight: bold;
+    border-radius: 10px 10px 0px 0px;
+    padding: 5px;
+}

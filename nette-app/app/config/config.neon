@@ -1,0 +1,25 @@
+#
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# https://nette.org/security-warning
+#
+parameters:
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+services:
+	- App\Forms\FormFactory
+	- App\Model\Product\SerialNumber\Generator
+	- App\Model\Product\TypeManager
+	- App\Model\Product\SerialNumberManager
+	- App\Model\ProductManager
+	- App\Forms\ProductFormFactory
+	router: App\RouterFactory::createRouter
